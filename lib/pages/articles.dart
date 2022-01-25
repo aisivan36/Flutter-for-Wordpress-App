@@ -11,6 +11,8 @@ import 'package:flutter_wordpress_app/widgets/articleBoxFeatured.dart';
 import 'package:http/http.dart' as http;
 
 class Articles extends StatefulWidget {
+  const Articles({Key? key}) : super(key: key);
+
   @override
   _ArticlesState createState() => _ArticlesState();
 }
@@ -43,9 +45,9 @@ class _ArticlesState extends State<Articles> {
 
   Future<List<dynamic>> fetchLatestArticles(int page) async {
     try {
-      var response = await http.get(
-          Uri.parse('$WORDPRESS_URL/wp-json/wp/v2/posts/?page=$page&per_page=10&_fields=id,date,title,content,custom,link'));
-      if (this.mounted) {
+      var response = await http.get(Uri.parse(
+          '$WORDPRESS_URL/wp-json/wp/v2/posts/?page=$page&per_page=10&_fields=id,date,title,content,custom,link'));
+      if (mounted) {
         if (response.statusCode == 200) {
           setState(() {
             latestArticles.addAll(json
@@ -70,10 +72,10 @@ class _ArticlesState extends State<Articles> {
 
   Future<List<dynamic>> fetchFeaturedArticles(int page) async {
     try {
-      var response = await http.get(
-          Uri.parse("$WORDPRESS_URL/wp-json/wp/v2/posts/?categories[]=$FEATURED_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
+      var response = await http.get(Uri.parse(
+          "$WORDPRESS_URL/wp-json/wp/v2/posts/?categories[]=$FEATURED_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
 
-      if (this.mounted) {
+      if (mounted) {
         if (response.statusCode == 200) {
           setState(() {
             featuredArticles.addAll(json
@@ -111,7 +113,7 @@ class _ArticlesState extends State<Articles> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Image(
+          title: const Image(
             image: AssetImage('assets/icon.png'),
             height: 45,
           ),
@@ -119,7 +121,7 @@ class _ArticlesState extends State<Articles> {
           backgroundColor: Colors.white,
         ),
         body: Container(
-          decoration: BoxDecoration(color: Colors.white70),
+          decoration: const BoxDecoration(color: Colors.white70),
           child: SingleChildScrollView(
             controller: _controller,
             scrollDirection: Axis.vertical,
@@ -138,7 +140,7 @@ class _ArticlesState extends State<Articles> {
       future: latestArticles,
       builder: (context, articleSnapshot) {
         if (articleSnapshot.hasData) {
-          if (articleSnapshot.data!.length == 0) return Container();
+          if (articleSnapshot.data!.isEmpty) return Container();
           return Column(
             children: <Widget>[
               Column(
@@ -156,19 +158,17 @@ class _ArticlesState extends State<Articles> {
                   child: articleBox(context, item, heroId),
                 );
               }).toList()),
-              !_infiniteStop
-                  ? Container()
-                  : Container()
+              !_infiniteStop ? Container() : Container()
             ],
           );
         } else if (articleSnapshot.hasError) {
           return Container();
         }
         return Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            height: 150,
-                );
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width,
+          height: 150,
+        );
       },
     );
   }
@@ -180,7 +180,7 @@ class _ArticlesState extends State<Articles> {
         future: featuredArticles,
         builder: (context, articleSnapshot) {
           if (articleSnapshot.hasData) {
-            if (articleSnapshot.data!.length == 0) return Container();
+            if (articleSnapshot.data!.isEmpty) return Container();
             return Row(
                 children: articleSnapshot.data!.map((item) {
               final heroId = item.id.toString() + "-featured";
@@ -198,7 +198,7 @@ class _ArticlesState extends State<Articles> {
           } else if (articleSnapshot.hasError) {
             return Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: Column(
@@ -207,10 +207,10 @@ class _ArticlesState extends State<Articles> {
                     "assets/no-internet.png",
                     width: 250,
                   ),
-                  Text("No Internet Connection."),
+                  const Text("No Internet Connection."),
                   TextButton.icon(
-                    icon: Icon(Icons.refresh),
-                    label: Text("Reload"),
+                    icon: const Icon(Icons.refresh),
+                    label: const Text("Reload"),
                     onPressed: () {
                       _futureLastestArticles = fetchLatestArticles(1);
                       _futureFeaturedArticles = fetchFeaturedArticles(1);
@@ -221,11 +221,10 @@ class _ArticlesState extends State<Articles> {
             );
           }
           return Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              height: 280,
-                  
-                  );
+            alignment: Alignment.center,
+            width: MediaQuery.of(context).size.width,
+            height: 280,
+          );
         },
       ),
     );

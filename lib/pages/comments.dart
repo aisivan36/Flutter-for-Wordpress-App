@@ -12,8 +12,8 @@ import 'add_comment.dart';
 
 Future<List<dynamic>> fetchComments(int id) async {
   try {
-    var response = await http
-        .get(Uri.parse("$WORDPRESS_URL/wp-json/wp/v2/comments?post=" + id.toString()));
+    var response = await http.get(Uri.parse(
+        "$WORDPRESS_URL/wp-json/wp/v2/comments?post=" + id.toString()));
 
     if (response.statusCode == 200) {
       return json
@@ -31,7 +31,7 @@ Future<List<dynamic>> fetchComments(int id) async {
 class Comments extends StatefulWidget {
   final int commentId;
 
-  Comments(this.commentId, {Key? key}) : super(key: key);
+  const Comments(this.commentId, {Key? key}) : super(key: key);
   @override
   _CommentsState createState() => _CommentsState();
 }
@@ -43,7 +43,7 @@ class _CommentsState extends State<Comments> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
           color: Colors.black,
           onPressed: () {
             Navigator.of(context).pop();
@@ -58,7 +58,7 @@ class _CommentsState extends State<Comments> {
         elevation: 5,
         backgroundColor: Colors.white,
       ),
-      body: Container(
+      body: SizedBox(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
@@ -74,7 +74,7 @@ class _CommentsState extends State<Comments> {
                 fullscreenDialog: true,
               ));
         },
-        child: Icon(Icons.add_comment),
+        child: const Icon(Icons.add_comment),
         backgroundColor: Theme.of(context).primaryColor,
       ),
     );
@@ -86,15 +86,16 @@ Widget commentSection(Future<List<dynamic>> comments) {
     future: comments,
     builder: (context, commentSnapshot) {
       if (commentSnapshot.hasData) {
-        if (commentSnapshot.data!.length == 0)
+        if (commentSnapshot.data!.isEmpty) {
           return Container(
             height: 500,
             alignment: Alignment.center,
-            child: Text(
+            child: const Text(
               "No Comments.\nBe the first to write one.",
               textAlign: TextAlign.center,
             ),
           );
+        }
         return Column(
             children: commentSnapshot.data!.map((item) {
           return InkWell(

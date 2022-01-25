@@ -11,6 +11,8 @@ import 'package:flutter_wordpress_app/widgets/searchBoxes.dart';
 import 'package:http/http.dart' as http;
 
 class Search extends StatefulWidget {
+  const Search({Key? key}) : super(key: key);
+
   @override
   _SearchState createState() => _SearchState();
 }
@@ -20,8 +22,7 @@ class _SearchState extends State<Search> {
   List<dynamic> searchedArticles = [];
   Future<List<dynamic>>? _futureSearchedArticles;
   ScrollController? _controller;
-  final TextEditingController _textFieldController =
-      new TextEditingController();
+  final TextEditingController _textFieldController = TextEditingController();
 
   int page = 1;
   bool _infiniteStop = false;
@@ -44,10 +45,10 @@ class _SearchState extends State<Search> {
         return searchedArticles;
       }
 
-      var response = await http.get(
-          Uri.parse("$WORDPRESS_URL/wp-json/wp/v2/posts?search=$searchText&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
+      var response = await http.get(Uri.parse(
+          "$WORDPRESS_URL/wp-json/wp/v2/posts?search=$searchText&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
 
-      if (this.mounted) {
+      if (mounted) {
         if (response.statusCode == 200) {
           setState(() {
             if (scrollUpdate) {
@@ -103,7 +104,7 @@ class _SearchState extends State<Search> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Search',
+        title: const Text('Search',
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -112,26 +113,26 @@ class _SearchState extends State<Search> {
         elevation: 5,
         backgroundColor: Colors.white,
       ),
-      body: Container(
+      body: SizedBox(
         child: SingleChildScrollView(
           controller: _controller,
           scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Card(
                   elevation: 6,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
+                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
                     child: TextField(
                         controller: _textFieldController,
                         decoration: InputDecoration(
                           labelText: 'Search news',
                           suffixIcon: _searchText == ""
-                              ? Icon(Icons.search)
+                              ? const Icon(Icons.search)
                               : IconButton(
-                                  icon: Icon(Icons.close),
+                                  icon: const Icon(Icons.close),
                                   onPressed: () {
                                     _textFieldController.clear();
                                     setState(() {
@@ -197,14 +198,14 @@ class _SearchState extends State<Search> {
                   ? Container(
                       alignment: Alignment.center,
                       height: 30,
-                          )
+                    )
                   : Container()
             ],
           );
         } else if (articleSnapshot.hasError) {
           return Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Column(
@@ -213,10 +214,10 @@ class _SearchState extends State<Search> {
                   "assets/no-internet.png",
                   width: 250,
                 ),
-                Text("No Internet Connection."),
+                const Text("No Internet Connection."),
                 TextButton.icon(
-                  icon: Icon(Icons.refresh),
-                  label: Text("Reload"),
+                  icon: const Icon(Icons.refresh),
+                  label: const Text("Reload"),
                   onPressed: () {
                     _futureSearchedArticles = fetchSearchedArticles(
                         _searchText, _searchText == "", page, false);
@@ -226,11 +227,7 @@ class _SearchState extends State<Search> {
             ),
           );
         }
-        return Container(
-            alignment: Alignment.center,
-            width: 300,
-            height: 150
-            );
+        return Container(alignment: Alignment.center, width: 300, height: 150);
       },
     );
   }

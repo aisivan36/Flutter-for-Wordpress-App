@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 class CategoryArticles extends StatefulWidget {
   final int id;
   final String name;
-  CategoryArticles(this.id, this.name, {Key? key}) : super(key: key);
+  const CategoryArticles(this.id, this.name, {Key? key}) : super(key: key);
   @override
   _CategoryArticlesState createState() => _CategoryArticlesState();
 }
@@ -41,12 +41,12 @@ class _CategoryArticlesState extends State<CategoryArticles> {
 
   Future<List<dynamic>> fetchCategoryArticles(int page) async {
     try {
-      var response = await http.get(
-          Uri.parse("$WORDPRESS_URL/wp-json/wp/v2/posts?categories[]=" +
+      var response = await http.get(Uri.parse(
+          "$WORDPRESS_URL/wp-json/wp/v2/posts?categories[]=" +
               widget.id.toString() +
               "&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
 
-      if (this.mounted) {
+      if (mounted) {
         if (response.statusCode == 200) {
           setState(() {
             categoryArticles.addAll(json
@@ -87,7 +87,7 @@ class _CategoryArticlesState extends State<CategoryArticles> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           color: Colors.black,
           onPressed: () {
             Navigator.of(context).pop();
@@ -95,7 +95,7 @@ class _CategoryArticlesState extends State<CategoryArticles> {
         ),
         title: Text(widget.name,
             textAlign: TextAlign.left,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -104,12 +104,13 @@ class _CategoryArticlesState extends State<CategoryArticles> {
         backgroundColor: Colors.white,
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: const BoxDecoration(color: Colors.white),
         child: SingleChildScrollView(
             controller: _controller,
             scrollDirection: Axis.vertical,
-            child: Column(
-                children: <Widget>[categoryPosts(_futureCategoryArticles as Future<List<dynamic>>)])),
+            child: Column(children: <Widget>[
+              categoryPosts(_futureCategoryArticles as Future<List<dynamic>>)
+            ])),
       ),
     );
   }
@@ -119,7 +120,7 @@ class _CategoryArticlesState extends State<CategoryArticles> {
       future: categoryArticles,
       builder: (context, articleSnapshot) {
         if (articleSnapshot.hasData) {
-          if (articleSnapshot.data!.length == 0) return Container();
+          if (articleSnapshot.data!.isEmpty) return Container();
           return Column(
             children: <Widget>[
               Column(
@@ -141,7 +142,7 @@ class _CategoryArticlesState extends State<CategoryArticles> {
                   ? Container(
                       alignment: Alignment.center,
                       height: 30,
-                      )
+                    )
                   : Container()
             ],
           );
@@ -154,7 +155,6 @@ class _CategoryArticlesState extends State<CategoryArticles> {
         return Container(
           alignment: Alignment.center,
           height: 400,
-          
         );
       },
     );

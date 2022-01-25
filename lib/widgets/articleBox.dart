@@ -4,7 +4,7 @@ import 'package:flutter_wordpress_app/models/Article.dart';
 
 Widget articleBox(BuildContext context, Article article, String heroId) {
   return ConstrainedBox(
-    constraints: new BoxConstraints(
+    constraints: const BoxConstraints(
       minHeight: 160.0,
       maxHeight: 175.0,
     ),
@@ -12,31 +12,32 @@ Widget articleBox(BuildContext context, Article article, String heroId) {
       children: <Widget>[
         Container(
           alignment: Alignment.bottomRight,
-          margin: EdgeInsets.fromLTRB(20, 16, 8, 0),
+          margin: const EdgeInsets.fromLTRB(20, 16, 8, 0),
           child: Card(
             elevation: 6,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(110, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(110, 0, 0, 0),
               child: Column(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.fromLTRB(8, 0, 4, 0),
+                    padding: const EdgeInsets.fromLTRB(8, 0, 4, 0),
                     child: Column(
                       children: <Widget>[
-                        Container(
+                        SizedBox(
                           child: Html(
-                              data: article.title!.length > 70
-                                  ? "<h2>" +
-                                      article.title!.substring(0, 70) +
-                                      "...</h2>"
-                                  : "<h2>" + article.title.toString() + "</h2>",
-                              style: {
-                                "h2": Style(
-                                    color: Theme.of(context).primaryColorDark,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: FontSize.em(1.05),
-                                    padding: EdgeInsets.all(2),
-                                )},
+                            data: article.title!.length > 70
+                                ? "<h2>" +
+                                    article.title!.substring(0, 70) +
+                                    "...</h2>"
+                                : "<h2>" + article.title.toString() + "</h2>",
+                            style: {
+                              "h2": Style(
+                                color: Theme.of(context).primaryColorDark,
+                                fontWeight: FontWeight.w500,
+                                fontSize: FontSize.em(1.05),
+                                padding: const EdgeInsets.all(2),
+                              )
+                            },
                           ),
                         ),
                         Container(
@@ -47,28 +48,28 @@ Widget articleBox(BuildContext context, Article article, String heroId) {
                             children: <Widget>[
                               Container(
                                 decoration: BoxDecoration(
-                                    color: Color(0xFFE3E3E3),
+                                    color: const Color(0xFFE3E3E3),
                                     borderRadius: BorderRadius.circular(3)),
-                                padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                                padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                                 child: Text(
                                   article.category.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 11,
                                       fontWeight: FontWeight.w400),
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.fromLTRB(4, 8, 4, 8),
+                                padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
                                 child: Row(
                                   children: <Widget>[
-                                    Icon(
+                                    const Icon(
                                       Icons.timer,
                                       color: Colors.black45,
                                       size: 12.0,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 4,
                                     ),
                                     Text(
@@ -97,7 +98,7 @@ Widget articleBox(BuildContext context, Article article, String heroId) {
             child: Hero(
               tag: heroId,
               child: ClipRRect(
-                borderRadius: new BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
                   article.image.toString(),
                   fit: BoxFit.cover,
@@ -108,7 +109,7 @@ Widget articleBox(BuildContext context, Article article, String heroId) {
               borderRadius: BorderRadius.circular(10.0),
             ),
             elevation: 0,
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
           ),
         ),
         article.video != ""
@@ -122,7 +123,7 @@ Widget articleBox(BuildContext context, Article article, String heroId) {
                     child: Image.asset("assets/play-button.png"),
                   ),
                   elevation: 8,
-                  shape: CircleBorder(),
+                  shape: const CircleBorder(),
                   clipBehavior: Clip.antiAlias,
                 ),
               )

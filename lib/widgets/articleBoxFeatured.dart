@@ -5,20 +5,20 @@ import 'package:flutter_wordpress_app/models/Article.dart';
 Widget articleBoxFeatured(
     BuildContext context, Article article, String heroId) {
   return ConstrainedBox(
-    constraints: new BoxConstraints(
+    constraints: const BoxConstraints(
         minHeight: 280.0, maxHeight: 290.0, minWidth: 360.0, maxWidth: 360.0),
     child: Stack(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.all(8),
-          child: Container(
+          padding: const EdgeInsets.all(8),
+          child: SizedBox(
             height: 200,
             width: 400,
             child: Card(
               child: Hero(
                 tag: heroId,
                 child: ClipRRect(
-                  borderRadius: new BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
                     article.image.toString(),
                     fit: BoxFit.cover,
@@ -29,7 +29,7 @@ Widget articleBoxFeatured(
                 borderRadius: BorderRadius.circular(10.0),
               ),
               elevation: 1,
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
             ),
           ),
         ),
@@ -41,14 +41,14 @@ Widget articleBoxFeatured(
             alignment: Alignment.bottomRight,
             height: 200,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
               child: Card(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
+                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Container(
+                      SizedBox(
                         child: Html(
                             data: article.title!.length > 70
                                 ? "<h2>" +
@@ -57,11 +57,11 @@ Widget articleBoxFeatured(
                                 : "<h2>" + article.title.toString() + "</h2>",
                             style: {
                               "h2": Style(
-                                  color: Theme.of(context).primaryColorDark,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: FontSize.em(1.05),
-                                  padding: EdgeInsets.all(2),
-                                  ),
+                                color: Theme.of(context).primaryColorDark,
+                                fontWeight: FontWeight.w500,
+                                fontSize: FontSize.em(1.05),
+                                padding: const EdgeInsets.all(2),
+                              ),
                             }),
                       ),
                       Container(
@@ -72,28 +72,28 @@ Widget articleBoxFeatured(
                           children: <Widget>[
                             Container(
                               decoration: BoxDecoration(
-                                  color: Color(0xFFE3E3E3),
+                                  color: const Color(0xFFE3E3E3),
                                   borderRadius: BorderRadius.circular(3)),
-                              padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
-                              margin: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                              padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                               child: Text(
                                 article.category.toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 11,
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.fromLTRB(4, 8, 4, 8),
+                              padding: const EdgeInsets.fromLTRB(4, 8, 4, 8),
                               child: Row(
                                 children: <Widget>[
-                                  Icon(
+                                  const Icon(
                                     Icons.timer,
                                     color: Colors.black45,
                                     size: 12.0,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 4,
                                   ),
                                   Text(
@@ -124,7 +124,7 @@ Widget articleBoxFeatured(
                     child: Image.asset("assets/play-button.png"),
                   ),
                   elevation: 18.0,
-                  shape: CircleBorder(),
+                  shape: const CircleBorder(),
                   clipBehavior: Clip.antiAlias,
                 ),
               )

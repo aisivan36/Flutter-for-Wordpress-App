@@ -5,19 +5,21 @@ import 'package:flutter_wordpress_app/pages/local_articles.dart';
 import 'package:flutter_wordpress_app/pages/search.dart';
 import 'package:flutter_wordpress_app/pages/settings.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Icilome',
         theme: ThemeData(
           brightness: Brightness.light,
-          primaryColor: Color(0xFF385C7B),
+          primaryColor: const Color(0xFF385C7B),
           primaryColorLight: Colors.white,
           primaryColorDark: Colors.black,
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
               headline1: TextStyle(
                 fontSize: 17,
                 color: Colors.black,
@@ -27,36 +29,35 @@ class MyApp extends StatelessWidget {
               ),
               caption: TextStyle(color: Colors.black45, fontSize: 10),
               bodyText1: TextStyle(
-                fontSize: 16,
-                height: 1.5,
-                color: Colors.black87,
-                fontWeight: FontWeight.normal
-              )),
+                  fontSize: 16,
+                  height: 1.5,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.normal)),
         ),
-        home: MyHomePage());
+        home: const MyHomePage());
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = [
-    Articles(),
-    LocalArticles(),
-    Search(),
-    Settings()
+    const Articles(),
+    const LocalArticles(),
+    const Search(),
+    const Settings()
   ];
 
   @override
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.white,
-          selectedLabelStyle:
-              TextStyle(fontWeight: FontWeight.w500, fontFamily: "Soleil"),
-          unselectedLabelStyle: TextStyle(fontFamily: "Soleil"),
-          items: <BottomNavigationBarItem>[
+          selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w500, fontFamily: "Soleil"),
+          unselectedLabelStyle: const TextStyle(fontFamily: "Soleil"),
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.flare), label: PAGE2_CATEGORY_NAME),

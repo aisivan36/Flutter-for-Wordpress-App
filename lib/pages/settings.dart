@@ -3,18 +3,17 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
+  const Settings({Key? key}) : super(key: key);
+
   @override
   _SettingsState createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-
   @override
   void initState() {
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class _SettingsState extends State<Settings> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'More',
           style: TextStyle(
               color: Colors.black,
@@ -34,40 +33,39 @@ class _SettingsState extends State<Settings> {
         backgroundColor: Colors.white,
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: const BoxDecoration(color: Colors.white),
         child: Column(
           children: <Widget>[
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
-              child: Image(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+              child: const Image(
                 image: AssetImage('assets/icon.png'),
                 height: 50,
               ),
             ),
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-              child: Text(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+              child: const Text(
                 "Version 2.0.0 \n flutterblog.crumet.com \n Demo flutter app for wordpress news website",
                 textAlign: TextAlign.center,
                 style: TextStyle(height: 1.6, color: Colors.black87),
               ),
             ),
-            Divider(
+            const Divider(
               height: 10,
               thickness: 2,
             ),
             ListView(
               shrinkWrap: true,
               children: <Widget>[
-                
                 ListTile(
                   leading: Image.asset(
                     "assets/more/contact.png",
                     width: 30,
                   ),
-                  title: Text('Contact'),
+                  title: const Text('Contact'),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -80,7 +78,7 @@ class _SettingsState extends State<Settings> {
                               throw 'Could not launch $url';
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             "flutterblog.crumet.com",
                             style: TextStyle(color: Colors.black54),
                           )),
@@ -93,7 +91,7 @@ class _SettingsState extends State<Settings> {
                               throw 'Could not launch $url';
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             "info@crumet.com",
                             style: TextStyle(color: Colors.black54),
                           )),
@@ -110,8 +108,9 @@ class _SettingsState extends State<Settings> {
                       "assets/more/share.png",
                       width: 30,
                     ),
-                    title: Text('Share'),
-                    subtitle: Text("Spread the words of flutter blog crumet"),
+                    title: const Text('Share'),
+                    subtitle:
+                        const Text("Spread the words of flutter blog crumet"),
                   ),
                 ),
               ],

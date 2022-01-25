@@ -4,9 +4,9 @@ import 'package:flutter_wordpress_app/pages/category_articles.dart';
 
 Widget searchBoxes(BuildContext context) {
   return GridView.count(
-    padding: EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
     shrinkWrap: true,
-    physics: ScrollPhysics(),
+    physics: const ScrollPhysics(),
     crossAxisCount: 3,
     children: List.generate(CUSTOM_CATEGORIES.length, (index) {
       var cat = CUSTOM_CATEGORIES[index];
@@ -25,15 +25,15 @@ Widget searchBoxes(BuildContext context) {
             );
           },
           child: Container(
-            padding: EdgeInsets.fromLTRB(8, 16, 8, 8),
+            padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
             child: Column(
               children: <Widget>[
                 SizedBox(width: 100, height: 45, child: Image.asset(image)),
-                Spacer(),
+                const Spacer(),
                 Text(
                   name,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15,
                     height: 1.2,
                     fontWeight: FontWeight.w500,
