@@ -14,3 +14,18 @@ class Comment {
         content: json["content"]["rendered"]);
   }
 }
+
+class AddModelComment {
+  final int? id;
+  final String? name, email, website, comment;
+
+  AddModelComment({this.id, this.name, this.email, this.website, this.comment});
+
+  Map<String, dynamic> toJson() => {
+        "author_email": email?.trim().toLowerCase(),
+        "author_name": name,
+        "author_website": website,
+        "content": comment,
+        "post": id.toString(),
+      };
+}
