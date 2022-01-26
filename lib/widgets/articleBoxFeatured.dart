@@ -20,7 +20,8 @@ Widget articleBoxFeatured(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
-                    article.image.toString(),
+                    article.image ??
+                        'https://toppng.com/uploads/preview/fancy-line-png-11552252746xsn7aqxrgj.png',
                     fit: BoxFit.cover,
                   ),
                 ),
