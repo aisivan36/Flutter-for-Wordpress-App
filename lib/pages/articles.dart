@@ -58,6 +58,7 @@ class _ArticlesState extends State<Articles> {
               _infiniteStop = true;
             }
           });
+          print('latestArticle $latestArticles');
           return latestArticles;
         }
         setState(() {
@@ -158,7 +159,7 @@ class _ArticlesState extends State<Articles> {
                   child: articleBox(context, item, heroId),
                 );
               }).toList()),
-              !_infiniteStop ? Container() : Container()
+              !_infiniteStop ? const CircularProgressIndicator() : Container()
             ],
           );
         } else if (articleSnapshot.hasError) {
