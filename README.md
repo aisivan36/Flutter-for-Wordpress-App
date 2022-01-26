@@ -42,9 +42,14 @@ Update the wordpress **functions.php** file on your theme by appending the follo
 
 ```php
 function flutter_news_rest_prepare_post($data, $post, $request) {
+		$empty_stringsd = '';
     $_data = $data->data;
     $_data["custom"]["td_video"] = get_post_meta($post->ID, 'td_post_video', true) ?? '';
-    $_data['custom']["featured_image"] = get_the_post_thumbnail_url($post->ID, "original") ?? '';
+    	if (has_post_thumbnail()) {
+			$_data['custom']["featured_image"] = get_the_post_thumbnail_url($post->ID,  "original") ?? '';
+		} else {
+			$_data['custom']["featured_image"] =	$empty_stringsd;
+		}
     $_data['custom']["author"]["name"]   = get_author_name($_data['author']);
     $_data['custom']["author"]["avatar"] = get_avatar_url($_data['author']);
     $_data['custom']["categories"] = get_the_category($_data["id"]);
