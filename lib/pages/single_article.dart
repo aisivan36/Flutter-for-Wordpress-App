@@ -38,7 +38,7 @@ class _SingleArticleState extends State<SingleArticle> {
       int postId = widget.article.id;
       int catId = widget.article.catId;
       var response = await http.get(Uri.parse(
-          "$WORDPRESS_URL/wp-json/wp/v2/posts?exclude=$postId&categories[]=$catId&per_page=3"));
+          "$wordpressUrl/wp-json/wp/v2/posts?exclude=$postId&categories[]=$catId&per_page=3"));
 
       if (mounted) {
         if (response.statusCode == 200) {

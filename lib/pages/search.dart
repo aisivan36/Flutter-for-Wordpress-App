@@ -46,7 +46,7 @@ class _SearchState extends State<Search> {
       }
 
       var response = await http.get(Uri.parse(
-          "$WORDPRESS_URL/wp-json/wp/v2/posts?search=$searchText&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
+          "$wordpressUrl/wp-json/wp/v2/posts?search=$searchText&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
 
       if (mounted) {
         if (response.statusCode == 200) {

@@ -46,7 +46,7 @@ class _ArticlesState extends State<Articles> {
   Future<List<dynamic>> fetchLatestArticles(int page) async {
     try {
       var response = await http.get(Uri.parse(
-          '$WORDPRESS_URL/wp-json/wp/v2/posts/?page=$page&per_page=10&_fields=id,date,title,content,custom,link'));
+          '$wordpressUrl/wp-json/wp/v2/posts/?page=$page&per_page=10&_fields=id,date,title,content,custom,link'));
       if (mounted) {
         if (response.statusCode == 200) {
           setState(() {
@@ -73,7 +73,7 @@ class _ArticlesState extends State<Articles> {
   Future<List<dynamic>> fetchFeaturedArticles(int page) async {
     try {
       var response = await http.get(Uri.parse(
-          "$WORDPRESS_URL/wp-json/wp/v2/posts/?categories[]=$FEATURED_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
+          "$wordpressUrl/wp-json/wp/v2/posts/?categories[]=$FEATURED_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
 
       if (mounted) {
         if (response.statusCode == 200) {

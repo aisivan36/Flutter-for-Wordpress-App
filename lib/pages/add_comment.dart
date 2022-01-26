@@ -8,7 +8,7 @@ Future<bool> postComment(
     int id, String name, String email, String website, String comment) async {
   try {
     var response = await http
-        .post(Uri.parse("$WORDPRESS_URL/wp-json/wp/v2/comments"), body: {
+        .post(Uri.parse("$wordpressUrl/wp-json/wp/v2/comments"), body: {
       "author_email": email.trim().toLowerCase(),
       "author_name": name,
       "author_website": website,

@@ -42,7 +42,7 @@ class _LocalArticlesState extends State<LocalArticles> {
   Future<List<dynamic>> fetchLocalArticles(int page) async {
     try {
       http.Response response = await http.get(Uri.parse(
-          "$WORDPRESS_URL/wp-json/wp/v2/posts/?categories[]=$PAGE2_CATEGORY_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
+          "$wordpressUrl/wp-json/wp/v2/posts/?categories[]=$PAGE2_CATEGORY_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
       if (mounted) {
         if (response.statusCode == 200) {
           setState(() {
@@ -114,7 +114,7 @@ class _LocalArticlesState extends State<LocalArticles> {
       future: futureArticles,
       builder: (context, articleSnapshot) {
         if (articleSnapshot.hasData) {
-          if (articleSnapshot.data!.length == 0) return Container();
+          if (articleSnapshot.data!.isEmpty) return Container();
           return Column(
             children: <Widget>[
               Column(
