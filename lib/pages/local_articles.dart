@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wordpress_app/common/constants.dart';
 import 'package:flutter_wordpress_app/models/Article.dart';
 import 'package:flutter_wordpress_app/pages/single_Article.dart';
-import 'package:flutter_wordpress_app/widgets/articleBox.dart';
+import 'package:flutter_wordpress_app/widgets/article_box.dart';
 import 'package:http/http.dart' as http;
 
 class LocalArticles extends StatefulWidget {
@@ -42,7 +42,7 @@ class _LocalArticlesState extends State<LocalArticles> {
   Future<List<dynamic>> fetchLocalArticles(int page) async {
     try {
       http.Response response = await http.get(Uri.parse(
-          "$wordpressUrl/wp-json/wp/v2/posts/?categories[]=$PAGE2_CATEGORY_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
+          "$wordpressUrl/wp-json/wp/v2/posts/?categories[]=$page2CategoryId&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
       if (mounted) {
         if (response.statusCode == 200) {
           setState(() {
@@ -86,7 +86,7 @@ class _LocalArticlesState extends State<LocalArticles> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          PAGE2_CATEGORY_NAME,
+          page2CategoryName,
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,

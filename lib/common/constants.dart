@@ -5,18 +5,18 @@ library constants;
 const String wordpressUrl = "http://192.168.99.201/fluwp";
 
 // Featured category ID (for Home Screen top section)
-const int FEATURED_ID = 2;
+const int featuredId = 1;
 
 // Tab 2 page category name
-const String PAGE2_CATEGORY_NAME = "Lifestyle";
+const String page2CategoryName = "Lifestyle";
 
 // Tab 2 page category ID
-const int PAGE2_CATEGORY_ID = 6;
+const int page2CategoryId = 6;
 
 // Custom categories in search tab
 // Array in format
 // ["Category Name", "Image Link", "Category ID"]
-const List<dynamic> CUSTOM_CATEGORIES = [
+const List<dynamic> customCategories = [
   ["Lifestyle", "assets/boxed/lifestyle.png", 6],
   ["Fashion", "assets/boxed/fashion.png", 12],
   ["Music", "assets/boxed/music.png", 14],

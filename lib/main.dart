@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.flare), label: PAGE2_CATEGORY_NAME),
+                icon: Icon(Icons.flare), label: page2CategoryName),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
             BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'More'),
           ],

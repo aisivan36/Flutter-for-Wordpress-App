@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wordpress_app/common/constants.dart';
 import 'package:flutter_wordpress_app/models/Article.dart';
 import 'package:flutter_wordpress_app/pages/single_Article.dart';
-import 'package:flutter_wordpress_app/widgets/articleBox.dart';
+import 'package:flutter_wordpress_app/widgets/article_box.dart';
 import 'package:http/http.dart' as http;
 
 class CategoryArticles extends StatefulWidget {

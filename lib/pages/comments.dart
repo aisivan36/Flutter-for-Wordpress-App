@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wordpress_app/common/constants.dart';
-import 'package:flutter_wordpress_app/models/Comment.dart';
-import 'package:flutter_wordpress_app/widgets/commentBox.dart';
+import 'package:flutter_wordpress_app/models/comment.dart';
+import 'package:flutter_wordpress_app/widgets/comment_box.dart';
 import 'package:http/http.dart' as http;
 
 import 'add_comment.dart';

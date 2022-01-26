@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wordpress_app/common/constants.dart';
 import 'package:flutter_wordpress_app/models/Article.dart';
 import 'package:flutter_wordpress_app/pages/single_article.dart';
-import 'package:flutter_wordpress_app/widgets/articleBox.dart';
-import 'package:flutter_wordpress_app/widgets/searchBoxes.dart';
+import 'package:flutter_wordpress_app/widgets/article_box.dart';
+import 'package:flutter_wordpress_app/widgets/search_boxes.dart';
 import 'package:http/http.dart' as http;
 
 class Search extends StatefulWidget {
@@ -170,7 +170,7 @@ class _SearchState extends State<Search> {
       future: articles,
       builder: (context, articleSnapshot) {
         if (articleSnapshot.hasData) {
-          if (articleSnapshot.data!.length == 0) {
+          if (articleSnapshot.data!.isEmpty) {
             return Column(
               children: <Widget>[
                 searchBoxes(context),

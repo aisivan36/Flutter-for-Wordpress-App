@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wordpress_app/common/constants.dart';
 import 'package:flutter_wordpress_app/models/Article.dart';
 import 'package:flutter_wordpress_app/pages/single_Article.dart';
-import 'package:flutter_wordpress_app/widgets/articleBox.dart';
-import 'package:flutter_wordpress_app/widgets/articleBoxFeatured.dart';
+import 'package:flutter_wordpress_app/widgets/article_box.dart';
+import 'package:flutter_wordpress_app/widgets/article_box_featured.dart';
 import 'package:http/http.dart' as http;
 
 class Articles extends StatefulWidget {
@@ -73,7 +73,7 @@ class _ArticlesState extends State<Articles> {
   Future<List<dynamic>> fetchFeaturedArticles(int page) async {
     try {
       var response = await http.get(Uri.parse(
-          "$wordpressUrl/wp-json/wp/v2/posts/?categories[]=$FEATURED_ID&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
+          "$wordpressUrl/wp-json/wp/v2/posts/?categories[]=$featuredId&page=$page&per_page=10&_fields=id,date,title,content,custom,link"));
 
       if (mounted) {
         if (response.statusCode == 200) {

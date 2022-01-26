@@ -8,7 +8,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:flutter_wordpress_app/common/constants.dart';
 import 'package:flutter_wordpress_app/models/Article.dart';
 import 'package:flutter_wordpress_app/pages/comments.dart';
-import 'package:flutter_wordpress_app/widgets/articleBox.dart';
+import 'package:flutter_wordpress_app/widgets/article_box.dart';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 
@@ -78,7 +78,7 @@ class _SingleArticleState extends State<SingleArticle> {
       dailymotionUrl = articleVideo.split("/video/")[1];
     }
 
-    // print(article);
+    print(article.avatar);
 
     return Scaffold(
       body: Container(
