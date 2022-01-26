@@ -13,7 +13,7 @@ import 'add_comment.dart';
 Future<List<dynamic>> fetchComments(int id) async {
   try {
     var response = await http.get(Uri.parse(
-        "$WORDPRESS_URL/wp-json/wp/v2/comments?post=" + id.toString()));
+        "$wordpressUrl/wp-json/wp/v2/comments?post=" + id.toString()));
 
     if (response.statusCode == 200) {
       return json
