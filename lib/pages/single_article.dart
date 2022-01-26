@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 
 class SingleArticle extends StatefulWidget {
-  final dynamic article;
+  final Article article;
   final String heroId;
 
   const SingleArticle(this.article, this.heroId, {Key? key}) : super(key: key);
@@ -35,8 +35,8 @@ class _SingleArticleState extends State<SingleArticle> {
 
   Future<List<dynamic>> fetchRelatedArticles() async {
     try {
-      int postId = widget.article.id;
-      int catId = widget.article.catId;
+      int? postId = widget.article.id;
+      int? catId = widget.article.catId;
       var response = await http.get(Uri.parse(
           "$wordpressUrl/wp-json/wp/v2/posts?exclude=$postId&categories[]=$catId&per_page=3"));
 
@@ -71,12 +71,14 @@ class _SingleArticleState extends State<SingleArticle> {
     final articleVideo = widget.article.video;
     String youtubeUrl = "";
     String dailymotionUrl = "";
-    if (articleVideo.contains("youtube")) {
+    if (articleVideo!.contains("youtube")) {
       youtubeUrl = articleVideo.split('?v=')[1];
     }
     if (articleVideo.contains("dailymotion")) {
       dailymotionUrl = articleVideo.split("/video/")[1];
     }
+
+    // print(article);
 
     return Scaffold(
       body: Container(
@@ -155,7 +157,8 @@ class _SingleArticleState extends State<SingleArticle> {
                                             ),
                                           )
                                 : Image.network(
-                                    article.image,
+                                    article.image ??
+                                        'https://toppng.com/uploads/preview/fancy-line-png-11552252746xsn7aqxrgj.png',
                                     fit: BoxFit.cover,
                                   ),
                           ),
@@ -179,7 +182,7 @@ class _SingleArticleState extends State<SingleArticle> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Html(data: "<h2>" + article.title + "</h2>", style: {
+                      Html(data: "<h2>" + article.title! + "</h2>", style: {
                         "h2": Style(
                             color: Theme.of(context).primaryColorDark,
                             fontWeight: FontWeight.w500,
@@ -193,7 +196,7 @@ class _SingleArticleState extends State<SingleArticle> {
                         padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                         margin: const EdgeInsets.all(16),
                         child: Text(
-                          article.category,
+                          article.category ?? 'empty',
                           style: const TextStyle(
                               color: Colors.black, fontSize: 11),
                         ),
@@ -202,14 +205,15 @@ class _SingleArticleState extends State<SingleArticle> {
                         height: 45,
                         child: ListTile(
                           leading: CircleAvatar(
-                            backgroundImage: NetworkImage(article.avatar),
+                            backgroundImage: NetworkImage(article.avatar ??
+                                'https://toppng.com/uploads/preview/fancy-line-png-11552252746xsn7aqxrgj.png'),
                           ),
                           title: Text(
-                            "By " + article.author,
+                            "By " + article.author!,
                             style: const TextStyle(fontSize: 12),
                           ),
                           subtitle: Text(
-                            article.date,
+                            article.date!,
                             style: const TextStyle(fontSize: 11),
                           ),
                         ),
@@ -217,7 +221,7 @@ class _SingleArticleState extends State<SingleArticle> {
                       Container(
                         padding: const EdgeInsets.fromLTRB(16, 36, 16, 50),
                         child: HtmlWidget(
-                          article.content,
+                          article.content!,
                           webView: true,
                           textStyle: Theme.of(context).textTheme.bodyText1 ??
                               const TextStyle(),
@@ -250,7 +254,7 @@ class _SingleArticleState extends State<SingleArticle> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Comments(article.id),
+                          builder: (context) => Comments(article.id!),
                           fullscreenDialog: true,
                         ));
                   },
@@ -265,7 +269,7 @@ class _SingleArticleState extends State<SingleArticle> {
                     size: 24.0,
                   ),
                   onPressed: () {
-                    Share.share('Share the news: ' + article.link);
+                    Share.share('Share the news: ' + article.link!);
                   },
                 ),
               ),
