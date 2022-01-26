@@ -2,19 +2,31 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wordpress_app/common/constants.dart';
+import 'package:flutter_wordpress_app/models/comment.dart';
 import 'package:http/http.dart' as http;
 
 Future<bool> postComment(
     int id, String name, String email, String website, String comment) async {
   try {
-    var response = await http
-        .post(Uri.parse("$wordpressUrl/wp-json/wp/v2/comments"), body: {
-      "author_email": email.trim().toLowerCase(),
-      "author_name": name,
-      "author_website": website,
-      "content": comment,
-      "post": id.toString()
-    });
+    var getU = AddModelComment(
+      id: id,
+      email: email,
+      comment: comment,
+      name: name,
+      website: website,
+    );
+    var response = await http.post(
+        Uri.parse("$wordpressUrl/wp-json/wp/v2/comments"),
+        body: getU.toJson()
+        //     , body: {
+        //   "author_email": email.trim().toLowerCase(),
+        //   "author_name": name,
+        //   "author_website": website,
+        //   "content": comment,
+        //   "post": id.toString()
+        // }
+        );
+    print(response);
 
     if (response.statusCode == 201) {
       return true;
